@@ -4,14 +4,14 @@
       try {
         msg = String(msg||'').trim();
         if (!msg) return;
-        var wrap = document.querySelector('.miu-toast-wrap');
+        var wrap = document.querySelector('.ton-toast-wrap');
         if (!wrap) {
           wrap = document.createElement('div');
-          wrap.className = 'miu-toast-wrap';
+          wrap.className = 'ton-toast-wrap';
           document.body.appendChild(wrap);
         }
         var el = document.createElement('div');
-        el.className = 'miu-toast';
+        el.className = 'ton-toast';
         el.setAttribute('data-kind', kind || 'info');
         el.textContent = msg;
         wrap.appendChild(el);
@@ -28,7 +28,7 @@
       try {
         if (overlay && overlay.parentNode) return;
         overlay = document.createElement('div');
-        overlay.id = 'miuRuntimeModal';
+        overlay.id = 'tonRuntimeModal';
         overlay.style.position = 'fixed';
         overlay.style.inset = '0';
         overlay.style.zIndex = '2147483000';
@@ -69,7 +69,7 @@
         modalId = String(modalId || '').trim();
         if (!modalId) return;
         ensureOverlay();
-        var tpl = document.getElementById('miu-modal-tpl-' + modalId);
+        var tpl = document.getElementById('ton-modal-tpl-' + modalId);
         if (!tpl) return;
 
         currentModalId = modalId;
@@ -94,7 +94,7 @@
         if (!vw) vw = 1200;
         if (!vh) vh = 800;
         var stage = null;
-        try { stage = document.querySelector('.miu-stage'); } catch(_e) { stage = null; }
+        try { stage = document.querySelector('.ton-stage'); } catch(_e) { stage = null; }
         var boundW = vw;
         try {
           var sw = stage && stage.clientWidth ? Number(stage.clientWidth) : 0;
@@ -119,7 +119,7 @@
 
         overlayContent.innerHTML =
           (showCloseButton
-            ? '<button type="button" data-miu-modal-close="1" style="position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:999px;border:1px solid rgba(0,0,0,0.12);background:rgba(255,255,255,0.95);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5">×</button>'
+            ? '<button type="button" data-ton-modal-close="1" style="position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:999px;border:1px solid rgba(0,0,0,0.12);background:rgba(255,255,255,0.95);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5">×</button>'
             : '') +
           '<div style="position:absolute;inset:0;overflow:hidden;">' +
             '<div style="transform:scale(' + s + ');transform-origin:top left;width:' + mw + 'px;height:' + mh + 'px;position:relative;">' +
@@ -153,7 +153,7 @@
         if (!t) return;
 
         // Close button inside modal
-        var closeBtn = (t.closest && t.closest('[data-miu-modal-close="1"]')) ? t.closest('[data-miu-modal-close="1"]') : null;
+        var closeBtn = (t.closest && t.closest('[data-ton-modal-close="1"]')) ? t.closest('[data-ton-modal-close="1"]') : null;
         if (closeBtn) {
           closeModal();
           e.preventDefault();
@@ -161,7 +161,7 @@
           return;
         }
 
-        var btn = (t.closest && t.closest('[data-miu-btn="1"]')) ? t.closest('[data-miu-btn="1"]') : null;
+        var btn = (t.closest && t.closest('[data-ton-btn="1"]')) ? t.closest('[data-ton-btn="1"]') : null;
         if (!btn) return;
         var action = btn.getAttribute('data-action') || '';
         var url = btn.getAttribute('data-url') || '';

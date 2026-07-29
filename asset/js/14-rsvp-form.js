@@ -1,13 +1,13 @@
 (function(){
   // Địa chỉ máy chủ nhận dữ liệu (đặt trong asset/js/00-config.js)
   var apiReady = function(){
-    if (String(window.MIU_API_BASE || '').trim()) return true;
+    if (String(window.TON_API_BASE || '').trim()) return true;
     try { toast('Chưa cấu hình máy chủ lưu dữ liệu', 'error'); } catch(e) {}
     return false;
   };
 
   var apiUrl = function(path){
-    var base = String(window.MIU_API_BASE || '').replace(/\/+$/, '');
+    var base = String(window.TON_API_BASE || '').replace(/\/+$/, '');
     return base + path;
   };
 
@@ -17,14 +17,14 @@
       try {
         msg = String(msg||'').trim();
         if (!msg) return;
-        var wrap = document.querySelector('.miu-toast-wrap');
+        var wrap = document.querySelector('.ton-toast-wrap');
         if (!wrap) {
           wrap = document.createElement('div');
-          wrap.className = 'miu-toast-wrap';
+          wrap.className = 'ton-toast-wrap';
           document.body.appendChild(wrap);
         }
         var el = document.createElement('div');
-        el.className = 'miu-toast';
+        el.className = 'ton-toast';
         el.setAttribute('data-kind', kind || 'info');
         el.textContent = msg;
         wrap.appendChild(el);
@@ -32,14 +32,14 @@
       } catch(e) {}
     };
 
-    var sections = document.querySelectorAll('[data-miu-rsvp="1"]');
+    var sections = document.querySelectorAll('[data-ton-rsvp="1"]');
     if (!sections || !sections.length) return;
     var attach = function(sec){
       try {
-        var id = sec.getAttribute('data-miu-rsvp-id') || '';
+        var id = sec.getAttribute('data-ton-rsvp-id') || '';
         var slug = sec.getAttribute('data-slug') || '';
         if (!id || !slug) return;
-        var form = sec.querySelector('[data-miu-rsvp-form="1"][data-miu-rsvp-id="' + id.replace(/"/g,'\"') + '"]');
+        var form = sec.querySelector('[data-ton-rsvp-form="1"][data-ton-rsvp-id="' + id.replace(/"/g,'\"') + '"]');
         if (!form) return;
         form.addEventListener('submit', function(ev){
           try {

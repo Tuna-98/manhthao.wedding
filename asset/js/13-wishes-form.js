@@ -1,13 +1,13 @@
 (function(){
   // Địa chỉ máy chủ nhận dữ liệu (đặt trong asset/js/00-config.js)
   var apiReady = function(){
-    if (String(window.MIU_API_BASE || '').trim()) return true;
+    if (String(window.TON_API_BASE || '').trim()) return true;
     try { toast('Chưa cấu hình máy chủ lưu dữ liệu', 'error'); } catch(e) {}
     return false;
   };
 
   var apiUrl = function(path){
-    var base = String(window.MIU_API_BASE || '').replace(/\/+$/, '');
+    var base = String(window.TON_API_BASE || '').replace(/\/+$/, '');
     return base + path;
   };
 
@@ -17,14 +17,14 @@
       try {
         msg = String(msg||'').trim();
         if (!msg) return;
-        var wrap = document.querySelector('.miu-toast-wrap');
+        var wrap = document.querySelector('.ton-toast-wrap');
         if (!wrap) {
           wrap = document.createElement('div');
-          wrap.className = 'miu-toast-wrap';
+          wrap.className = 'ton-toast-wrap';
           document.body.appendChild(wrap);
         }
         var el = document.createElement('div');
-        el.className = 'miu-toast';
+        el.className = 'ton-toast';
         el.setAttribute('data-kind', kind || 'info');
         el.textContent = msg;
         wrap.appendChild(el);
@@ -39,17 +39,17 @@
       .replace(/"/g,'&quot;')
       .replace(/'/g,'&#39;');
     };
-    var sections = document.querySelectorAll('[data-miu-wishes="1"]');
+    var sections = document.querySelectorAll('[data-ton-wishes="1"]');
     if (!sections || !sections.length) return;
 
     var attach = function(sec){
       try {
-        var id = sec.getAttribute('data-miu-wishes-id') || '';
+        var id = sec.getAttribute('data-ton-wishes-id') || '';
         var slug = sec.getAttribute('data-slug') || '';
         if (!id || !slug) return;
-        var listEl = sec.querySelector('[data-miu-wishes-list="1"][data-miu-wishes-id="' + id.replace(/"/g,'\"') + '"]');
-        var form = sec.querySelector('[data-miu-wishes-form="1"][data-miu-wishes-id="' + id.replace(/"/g,'\"') + '"]');
-        var moreBtn = sec.querySelector('[data-miu-wishes-more="1"][data-miu-wishes-id="' + id.replace(/"/g,'\"') + '"]');
+        var listEl = sec.querySelector('[data-ton-wishes-list="1"][data-ton-wishes-id="' + id.replace(/"/g,'\"') + '"]');
+        var form = sec.querySelector('[data-ton-wishes-form="1"][data-ton-wishes-id="' + id.replace(/"/g,'\"') + '"]');
+        var moreBtn = sec.querySelector('[data-ton-wishes-more="1"][data-ton-wishes-id="' + id.replace(/"/g,'\"') + '"]');
         if (!form) return;
 
         var initial = parseInt(sec.getAttribute('data-initial-limit') || '3', 10);
@@ -63,9 +63,9 @@
             var out = '';
             for (var i=0;i<Math.min(limit, arr.length);i++) {
               var w = arr[i] || {};
-              out += '<div class="miu-wishes-item">'
-                + '<div class="miu-wishes-name">' + esc(w.fullname||'') + '</div>'
-                + '<div class="miu-wishes-comment">' + esc(w.comment||'') + '</div>'
+              out += '<div class="ton-wishes-item">'
+                + '<div class="ton-wishes-name">' + esc(w.fullname||'') + '</div>'
+                + '<div class="ton-wishes-comment">' + esc(w.comment||'') + '</div>'
                 + '</div>';
             }
             return out;
@@ -80,7 +80,7 @@
             var arr = (cache && cache.length) ? cache : [];
             if (!arr.length) {
               var emptyText = String(sec.getAttribute('data-empty-text') || 'Chưa có lời chúc nào');
-              listEl.innerHTML = '<div class="miu-wishes-empty">' + esc(emptyText) + '</div>';
+              listEl.innerHTML = '<div class="ton-wishes-empty">' + esc(emptyText) + '</div>';
               try { listEl.style.display = ''; } catch(e) {}
               if (moreBtn) moreBtn.style.display = 'none';
               return;
@@ -106,7 +106,7 @@
             if (!listEl) return;
             if (cache && !force) { renderAll(); return; }
             // Chưa cấu hình máy chủ thì bỏ qua lặng lẽ, không quấy rầy khách
-            if (!String(window.MIU_API_BASE || '').trim()) { renderAll(); return; }
+            if (!String(window.TON_API_BASE || '').trim()) { renderAll(); return; }
             loading = true;
             fetch(apiUrl('/api/invitations/slug/' + encodeURIComponent(slug) + '/wishes'), { cache: 'no-store' })
               .then(function(res){ return res.json().then(function(j){ return { ok: res.ok, json: j }; }); })

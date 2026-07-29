@@ -3,7 +3,7 @@
     var sp = null;
     try { sp = new URLSearchParams(window.location.search || ''); } catch(e) {}
     if (sp && sp.get('muteMusic') === '1') return;
-    if (window.MIU_MUTE_MUSIC) return;
+    if (window.TON_MUTE_MUSIC) return;
 
     var audioRef = null;
 
@@ -39,7 +39,7 @@
 
     var getStartAt = function(){
       try {
-        var v = (window && (window.MIU_BG_START_AT != null)) ? window.MIU_BG_START_AT : null;
+        var v = (window && (window.TON_BG_START_AT != null)) ? window.TON_BG_START_AT : null;
         var n = Number(v);
         if (!isFinite(n) || n <= 0) return 0;
         return Math.floor(n);

@@ -28,7 +28,7 @@
         var loopAttr = el.getAttribute('data-anim-loop');
         var loop = loopAttr === '1' || isInfinitePreset(preset);
         var distance = el.getAttribute('data-anim-distance') || '';
-        var distanceStyle = distance ? '--miu-anim-distance:' + distance + 'px;' : '';
+        var distanceStyle = distance ? '--ton-anim-distance:' + distance + 'px;' : '';
         var hideAfter = Number(el.getAttribute('data-anim-hide-after') || 0);
         
         // Use custom cubic-bezier for swayBottom to create smoother pendulum-like motion
@@ -36,7 +36,7 @@
           easing = 'cubic-bezier(0.45, 0.05, 0.55, 0.95)';
         }
         var timing = preset === 'typewriter' ? 'steps(14,end)' : easing;
-        var name = 'miu-' + preset;
+        var name = 'ton-' + preset;
         try { el.style.opacity = '1'; } catch(e) {}
         try { 
           el.style.animation = name + ' ' + duration + 'ms ' + timing + ' ' + delay + 'ms both' + (loop ? ' infinite' : '');
@@ -46,18 +46,18 @@
           // Hide after X ms (plus delay) if configured and not looping
           if (!loop && isFinite(hideAfter) && hideAfter > 0) {
             try {
-              if (el.__miuHideTimer) clearTimeout(el.__miuHideTimer);
+              if (el.__tonHideTimer) clearTimeout(el.__tonHideTimer);
             } catch(_e) {}
             var total = Math.max(0, Math.floor(hideAfter + (isFinite(delay) && delay > 0 ? delay : 0)));
-            el.__miuHideTimer = setTimeout(function(){
+            el.__tonHideTimer = setTimeout(function(){
               try {
                 el.style.display = 'none';
-                el.setAttribute('data-miu-hidden-by-anim', '1');
+                el.setAttribute('data-ton-hidden-by-anim', '1');
               } catch(_e2) {}
             }, total);
           }
         } catch(e) {}
-        try { el.__miuAnimApplied = true; } catch(e) {}
+        try { el.__tonAnimApplied = true; } catch(e) {}
       } catch(e) {
         try { if (el) el.style.opacity = '1'; } catch(_e) {}
       }
@@ -93,7 +93,7 @@
 
     var getOpeningState = function(){
       try {
-        var opening = document.getElementById('miuOpening');
+        var opening = document.getElementById('tonOpening');
         if (!opening) return { exists: false, open: false };
         var openAttr = String(opening.getAttribute('data-open') || '');
         return { exists: true, open: openAttr === '1' };
@@ -125,14 +125,14 @@
         var fallbackTimer = null;
 
         var cleanup = function(){
-          try { window.removeEventListener('miu:opening:closed', onClosed, true); } catch(e) {}
-          try { window.removeEventListener('miu:opening:willClose', onWillClose, true); } catch(e) {}
+          try { window.removeEventListener('ton:opening:closed', onClosed, true); } catch(e) {}
+          try { window.removeEventListener('ton:opening:willClose', onWillClose, true); } catch(e) {}
           try { if (obs) obs.disconnect(); } catch(e) {}
           try { if (fallbackTimer) clearTimeout(fallbackTimer); } catch(e) {}
         };
 
         try {
-          window.addEventListener('miu:opening:closed', onClosed, true);
+          window.addEventListener('ton:opening:closed', onClosed, true);
         } catch(e) {}
 
         var onWillClose = function(){
@@ -143,11 +143,11 @@
         };
 
         try {
-          window.addEventListener('miu:opening:willClose', onWillClose, true);
+          window.addEventListener('ton:opening:willClose', onWillClose, true);
         } catch(e) {}
 
         try {
-          var opening = document.getElementById('miuOpening');
+          var opening = document.getElementById('tonOpening');
           if (opening && typeof MutationObserver !== 'undefined') {
             obs = new MutationObserver(function(){
               try {

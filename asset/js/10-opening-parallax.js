@@ -139,11 +139,11 @@
       try { window.addEventListener(ev, stop, { passive: true }); } catch(e) {}
     });
 
-    var opening = document.getElementById('miuOpening');
+    var opening = document.getElementById('tonOpening');
     if (opening) {
       // start after opening closes
       try {
-        var stage = document.getElementById('miuOpeningSides');
+        var stage = document.getElementById('tonOpeningSides');
         if (stage) {
           var sides = stage.querySelectorAll('.card-side');
           var done = 0;

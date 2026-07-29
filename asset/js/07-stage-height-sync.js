@@ -1,7 +1,7 @@
 (function(){
   try {
-    var stage = document.querySelector('.miu-stage');
-    var canvas = document.querySelector('.miu-canvas');
+    var stage = document.querySelector('.ton-stage');
+    var canvas = document.querySelector('.ton-canvas');
     if (!stage || !canvas) return;
     var sync = function(){
       try {
@@ -9,7 +9,7 @@
         var cw = 575;
         if (!sw || !cw) return;
         var s = Math.min(1, sw / cw);
-        try { document.documentElement.style.setProperty('--miu-s', String(s)); } catch(_e) {}
+        try { document.documentElement.style.setProperty('--ton-s', String(s)); } catch(_e) {}
 
         // Auto expand height when some nodes (e.g. RSVP) render taller than configured h
         try {

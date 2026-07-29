@@ -12,8 +12,8 @@
             if (shown) return;
             shown = true;
             var d = document.createElement('div');
-            d.id = 'miuBootLoading';
-            d.innerHTML = '<div class="miuBootSpinner" aria-label="loading"></div>';
+            d.id = 'tonBootLoading';
+            d.innerHTML = '<div class="tonBootSpinner" aria-label="loading"></div>';
             var mount = document.body || document.documentElement;
             mount.appendChild(d);
           } catch(_e) {}
@@ -22,7 +22,7 @@
           try {
             if (removed) return;
             removed = true;
-            var d = document.getElementById('miuBootLoading');
+            var d = document.getElementById('tonBootLoading');
             if (d) {
               try { d.setAttribute('data-hide','1'); } catch(_e3) {}
               setTimeout(function(){ try { if (d && d.parentNode) d.parentNode.removeChild(d); } catch(_e4) {} }, 220);

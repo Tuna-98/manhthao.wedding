@@ -1,13 +1,13 @@
 (function(){
   try {
-    var el = document.getElementById('miuOpening');
-    var btn = document.getElementById('miuOpeningBtn');
-    var cta = document.getElementById('miuOpeningCtaBtn');
-    var stage = document.getElementById('miuOpeningSides');
-    var mainStage = document.querySelector('.miu-stage');
+    var el = document.getElementById('tonOpening');
+    var btn = document.getElementById('tonOpeningBtn');
+    var cta = document.getElementById('tonOpeningCtaBtn');
+    var stage = document.getElementById('tonOpeningSides');
+    var mainStage = document.querySelector('.ton-stage');
     if (!el) return;
     var presetId = "";
-    var key = 'miu_opening_opened_' + "duc-thai-thu-hien-2026-05-24";
+    var key = 'ton_opening_opened_' + "duc-thai-thu-hien-2026-05-24";
 
     var getParam = function(name){
       try {
@@ -80,7 +80,7 @@
         if (!isFinite(s) || s <= 0) s = 1;
         // For PC, use fixed 600px width for opening
         var openingWidth = vw <= 480 ? String(Math.round(cw * s)) + 'px' : '600px';
-        stage.style.setProperty('--miu-opening-w', openingWidth);
+        stage.style.setProperty('--ton-opening-w', openingWidth);
       } catch(e) {}
     };
 
@@ -129,7 +129,7 @@
             try { stage.classList.remove('_animating'); } catch(e) {}
             try { if (btn) btn.removeAttribute('disabled'); } catch(e) {}
             try { if (cta) cta.removeAttribute('disabled'); } catch(e) {}
-            try { window.dispatchEvent(new Event('miu:opening:closed')); } catch(e) {}
+            try { window.dispatchEvent(new Event('ton:opening:closed')); } catch(e) {}
           };
           // For envelope presets (phongbixanh), keep the cover a bit longer after parts move away.
           // This avoids revealing the invitation too early.
@@ -190,7 +190,7 @@
           var lead = 1200;
           var t = Math.max(0, Math.round(total - lead));
           earlyTimer = setTimeout(function(){
-            try { window.dispatchEvent(new Event('miu:opening:willClose')); } catch(e) {}
+            try { window.dispatchEvent(new Event('ton:opening:willClose')); } catch(e) {}
           }, t);
         } catch(e) {}
       } catch(e) {

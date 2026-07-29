@@ -102,8 +102,8 @@
               '<div style="margin-top:16px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);">' +
                 '<div style="font-size:12px;opacity:0.9;line-height:1.5;">Nếu bạn không thấy mục “Mở bằng Safari”, hãy dùng cách dự phòng:</div>' +
                 '<div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;">' +
-                  '<button id="miuCopyLink" type="button" style="display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:12px;background:#ffffff;color:#0b1220;border:0;font-weight:800;">Sao chép link</button>' +
-                  '<button id="miuShareLink" type="button" style="display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.18);font-weight:700;">Chia sẻ</button>' +
+                  '<button id="tonCopyLink" type="button" style="display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:12px;background:#ffffff;color:#0b1220;border:0;font-weight:800;">Sao chép link</button>' +
+                  '<button id="tonShareLink" type="button" style="display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.18);font-weight:700;">Chia sẻ</button>' +
                 '</div>' +
               '</div>' +
             '</div>' +
@@ -120,7 +120,7 @@
 
         // Share sheet (iOS) gives the user a native way to open in Safari.
         try {
-          var shareBtn = document.getElementById('miuShareLink');
+          var shareBtn = document.getElementById('tonShareLink');
           if (shareBtn) {
             shareBtn.addEventListener('click', function(){
               try {
@@ -131,7 +131,7 @@
                 }
               } catch(e) {}
               try {
-                var copyBtn = document.getElementById('miuCopyLink');
+                var copyBtn = document.getElementById('tonCopyLink');
                 if (copyBtn && typeof copyBtn.click === 'function') copyBtn.click();
               } catch(e) {}
             }, { passive: true });
@@ -140,7 +140,7 @@
 
         // Copy link button
         try {
-          var copyBtn2 = document.getElementById('miuCopyLink');
+          var copyBtn2 = document.getElementById('tonCopyLink');
           if (copyBtn2) {
             copyBtn2.addEventListener('click', function(){
               try {
@@ -200,7 +200,7 @@
 
     var playAll = function(){
       try {
-        var vids = document.querySelectorAll('video[data-miu-play-on-opening-closed="1"]');
+        var vids = document.querySelectorAll('video[data-ton-play-on-opening-closed="1"]');
         for (var i=0;i<vids.length;i++) {
           try {
             var v = vids[i];
@@ -208,8 +208,8 @@
             // Ensure no looping; keep last frame when ended
             try { v.loop = false; } catch(_e) {}
             // Only attempt once
-            if (v.getAttribute('data-miu-played') === '1') continue;
-            v.setAttribute('data-miu-played','1');
+            if (v.getAttribute('data-ton-played') === '1') continue;
+            v.setAttribute('data-ton-played','1');
             // Autoplay policies require muted; we render muted already
             var p = v.play && v.play();
             try { if (p && typeof p.catch === 'function') p.catch(function(){}); } catch(_e2) {}
@@ -220,7 +220,7 @@
 
     var getOpeningState = function(){
       try {
-        var opening = document.getElementById('miuOpening');
+        var opening = document.getElementById('tonOpening');
         if (!opening) return { exists: false, open: false };
         var openAttr = String(opening.getAttribute('data-open') || '');
         return { exists: true, open: openAttr === '1' };
@@ -237,9 +237,9 @@
     }
 
     var onClosed = function(){
-      try { window.removeEventListener('miu:opening:closed', onClosed, true); } catch(_e) {}
+      try { window.removeEventListener('ton:opening:closed', onClosed, true); } catch(_e) {}
       playAll();
     };
-    window.addEventListener('miu:opening:closed', onClosed, true);
+    window.addEventListener('ton:opening:closed', onClosed, true);
   } catch(e) {}
 })();

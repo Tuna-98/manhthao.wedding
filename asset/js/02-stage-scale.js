@@ -7,6 +7,6 @@
         if (!cw || !vw) return;
         var sw = vw <= 480 ? vw : Math.min(phone, Math.max(0, vw - 32));
         var s = Math.min(1, sw / cw);
-        document.documentElement.style.setProperty('--miu-s', String(s));
+        document.documentElement.style.setProperty('--ton-s', String(s));
       } catch(e) {}
     })();
