@@ -1,4 +1,17 @@
 (function(){
+  // Địa chỉ máy chủ nhận dữ liệu (đặt trong asset/js/00-config.js)
+  var apiReady = function(){
+    if (String(window.MIU_API_BASE || '').trim()) return true;
+    try { toast('Chưa cấu hình máy chủ lưu dữ liệu', 'error'); } catch(e) {}
+    return false;
+  };
+
+  var apiUrl = function(path){
+    var base = String(window.MIU_API_BASE || '').replace(/\/+$/, '');
+    return base + path;
+  };
+
+
   try {
     var toast = function(msg, kind){
       try {
@@ -92,8 +105,10 @@
             if (loading) return;
             if (!listEl) return;
             if (cache && !force) { renderAll(); return; }
+            // Chưa cấu hình máy chủ thì bỏ qua lặng lẽ, không quấy rầy khách
+            if (!String(window.MIU_API_BASE || '').trim()) { renderAll(); return; }
             loading = true;
-            fetch('/api/invitations/slug/' + encodeURIComponent(slug) + '/wishes', { cache: 'no-store' })
+            fetch(apiUrl('/api/invitations/slug/' + encodeURIComponent(slug) + '/wishes'), { cache: 'no-store' })
               .then(function(res){ return res.json().then(function(j){ return { ok: res.ok, json: j }; }); })
               .then(function(out){
                 if (!out.ok || !out.json || out.json.success !== true) throw new Error((out.json && out.json.error) || 'Tải thất bại');
@@ -124,7 +139,8 @@
             var comment = String(fd.get('comment')||'').trim();
             if (!fullname) { toast('Vui lòng nhập tên', 'error'); return; }
             if (!comment) { toast('Vui lòng nhập lời chúc', 'error'); return; }
-            fetch('/api/invitations/slug/' + encodeURIComponent(slug) + '/wishes', {
+            if (!apiReady()) return;
+            fetch(apiUrl('/api/invitations/slug/' + encodeURIComponent(slug) + '/wishes'), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ fullname: fullname, comment: comment })

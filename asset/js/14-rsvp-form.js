@@ -1,4 +1,17 @@
 (function(){
+  // Địa chỉ máy chủ nhận dữ liệu (đặt trong asset/js/00-config.js)
+  var apiReady = function(){
+    if (String(window.MIU_API_BASE || '').trim()) return true;
+    try { toast('Chưa cấu hình máy chủ lưu dữ liệu', 'error'); } catch(e) {}
+    return false;
+  };
+
+  var apiUrl = function(path){
+    var base = String(window.MIU_API_BASE || '').replace(/\/+$/, '');
+    return base + path;
+  };
+
+
   try {
     var toast = function(msg, kind){
       try {
@@ -130,7 +143,9 @@
               if (custom && Object.keys(custom).length) payload.customFields = custom;
             } catch(e) {}
 
-            fetch('/api/invitations/slug/' + encodeURIComponent(slug) + '/rsvp', {
+            if (!apiReady()) return;
+
+            fetch(apiUrl('/api/invitations/slug/' + encodeURIComponent(slug) + '/rsvp'), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload)
