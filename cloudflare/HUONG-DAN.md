@@ -131,7 +131,23 @@ UPDATE wishes SET approved = 1;                 -- cho hiện tất cả
   không tới 1% mức này.
 - **Không bị ngủ**: Worker luôn sẵn sàng, khác với gói miễn phí của một số dịch vụ khác.
 - **Chỉ thiệp của bạn gọi được**: trong `worker.js` có danh sách `ALLOWED` giới hạn
-  địa chỉ được phép. Nếu bạn đổi sang tên miền riêng, nhớ thêm tên miền đó vào danh sách.
+  địa chỉ được phép. Đang cho phép sẵn GitHub Pages, mọi tên miền `*.vercel.app`
+  (kể cả bản xem trước Vercel tự sinh), và localhost.
+
+  Nếu dùng tên miền riêng, thêm vào danh sách rồi Deploy lại Worker:
+
+  ```js
+  const ALLOWED = [
+    'https://tuna-98.github.io',
+    '*.vercel.app',
+    'https://ten-mien-cua-ban.com',   // <- thêm dòng này
+    'http://localhost',
+    'http://127.0.0.1',
+  ];
+  ```
+
+  **Quan trọng**: mỗi lần sửa `worker.js` phải dán lại vào Cloudflare và bấm
+  Deploy, sửa file trên máy thôi thì Worker vẫn chạy code cũ.
 - **Slug**: thiệp đang dùng `duc-thai-thu-hien-2026-05-24` (lấy từ thuộc tính
   `data-slug` trong `index.html`). Đổi slug thì dữ liệu cũ vẫn còn nhưng thiệp
   sẽ không đọc ra nữa, vì mỗi slug là một sổ riêng.

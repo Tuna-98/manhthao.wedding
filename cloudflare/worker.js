@@ -10,22 +10,41 @@
  */
 
 // Chỉ cho phép các địa chỉ này gọi API. Thêm tên miền của bạn vào đây nếu đổi.
+//   'https://abc.com' -> khớp đúng tên miền đó (mọi cổng)
+//   '*.vercel.app'    -> khớp mọi tên miền con, kể cả bản xem trước của Vercel
 const ALLOWED = [
   'https://tuna-98.github.io',
+  '*.vercel.app',
   'http://localhost',
   'http://127.0.0.1',
 ];
+
+function originAllowed(origin) {
+  // Mở thiệp bằng file:// thì trình duyệt gửi Origin: null -> vẫn cho qua
+  if (!origin || origin === 'null') return true;
+  let host;
+  try {
+    host = new URL(origin).host;
+  } catch (e) {
+    return false;
+  }
+  const bare = host.split(':')[0];
+  return ALLOWED.some((a) => {
+    if (a.startsWith('*.')) return bare === a.slice(2) || bare.endsWith(a.slice(1));
+    try {
+      return bare === new URL(a).hostname;
+    } catch (e) {
+      return false;
+    }
+  });
+}
 
 const MAX_NAME = 80;
 const MAX_TEXT = 1000;
 const MAX_LIST = 500;
 
 function corsHeaders(origin) {
-  // Mở thiệp bằng file:// thì trình duyệt gửi Origin: null -> vẫn cho qua
-  const ok =
-    !origin ||
-    origin === 'null' ||
-    ALLOWED.some((a) => origin === a || origin.startsWith(a + ':'));
+  const ok = originAllowed(origin);
   return {
     'Access-Control-Allow-Origin': ok ? origin || '*' : ALLOWED[0],
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
