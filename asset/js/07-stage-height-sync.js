@@ -13,7 +13,7 @@
 
         // Auto expand height when some nodes (e.g. RSVP) render taller than configured h
         try {
-          var baseH = 11709;
+          var baseH = 12455;
           var sh = Number(canvas.scrollHeight || 0);
           var nextH = Math.max(baseH, sh || 0);
           if (nextH && isFinite(nextH)) {

@@ -8,7 +8,7 @@
       @font-face{font-family:Flavinda;src:url(../fonts/flavinda.otf);font-style:normal;font-display:swap;}
       @font-face{font-family:Ergisa-Regular;src:url(../fonts/vip-ergisa-regular.otf);font-style:normal;font-display:swap;}
       .ton-wrap{min-height:100vh;display:block;box-sizing:border-box;}
-      .ton-stage{--cw:575px;--ch:11709px;--phone:575px;--s:var(--ton-s, 1);--sw:575px;--sh:11709px;width:min(var(--phone), calc(100vw - 32px));height:calc(var(--sh) * var(--s));position:relative;margin:0 auto;background:#f0f0f0;}
+      .ton-stage{--cw:575px;--ch:12455px;--phone:575px;--s:var(--ton-s, 1);--sw:575px;--sh:12455px;width:min(var(--phone), calc(100vw - 32px));height:calc(var(--sh) * var(--s));position:relative;margin:0 auto;background:#f0f0f0;}
       .ton-canvas-wrap{width:100%;height:100%;position:relative;}
       .ton-canvas{position:absolute;left:0;top:0;width:var(--cw);height:var(--ch);transform:scale(var(--s));transform-origin:top left;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,0.12);border-radius:12px;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
       .ton-canvas [data-node-type="element_text"]{line-height:1.25;}

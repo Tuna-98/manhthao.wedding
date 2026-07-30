@@ -1,4 +1,4 @@
       #tonBootLoading { position: fixed; inset: 0; z-index: 2147483000; background: #ffffff; display: flex; align-items: center; justify-content: center; transition: opacity 180ms ease; }
       #tonBootLoading[data-hide="1"] { opacity: 0; }
-      #tonBootLoading .tonBootSpinner { width: 44px; height: 44px; border-radius: 999px; border: 3px solid rgba(244,63,94,0.18); border-top-color: rgba(244,63,94,0.82); animation: tonBootSpin 700ms linear infinite; }
+      #tonBootLoading .tonBootSpinner { width: 44px; height: 44px; border-radius: 999px; border: 3px solid rgba(78,100,55,0.18); border-top-color: rgba(78,100,55,0.82); animation: tonBootSpin 700ms linear infinite; }
       @keyframes tonBootSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
