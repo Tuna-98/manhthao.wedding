@@ -171,6 +171,8 @@
       try {
         var t = e && e.target;
         if (!t) return;
+        // Nhãn "+22 ảnh" trên ô cuối là link sang album.html -> để trình duyệt tự điều hướng
+        if (t.closest && t.closest('[data-ton-album-more="1"]')) return;
         var mainBtn = t.closest ? t.closest('[data-ton-album-main="1"]') : null;
         if (mainBtn) {
           e.preventDefault();

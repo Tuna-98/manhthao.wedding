@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Album ảnh cưới - Mạnh Lâm &amp; Nguyễn Thảo</title>
+    <meta
+      name="description"
+      content="Trọn bộ 30 ảnh cưới của Mạnh Lâm và Nguyễn Thảo."
+    />
+    <link rel="canonical" href="https://manhthao-wedding-ashen.vercel.app/album.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Thiệp cưới Mạnh Lâm &amp; Nguyễn Thảo" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:url" content="https://manhthao-wedding-ashen.vercel.app/album.html" />
+    <meta property="og:title" content="Album ảnh cưới - Mạnh Lâm &amp; Nguyễn Thảo" />
+    <meta
+      property="og:description"
+      content="Trọn bộ 30 ảnh cưới của Mạnh Lâm và Nguyễn Thảo."
+    />
+    <meta
+      property="og:image"
+      content="https://manhthao-wedding-ashen.vercel.app/asset/images/share.jpg"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="asset/css/02-fonts.css" />
+    <link rel="stylesheet" href="asset/css/04-text-size-adjust.css" />
+    <style>
+      @font-face {
+        font-family: "High Spirited";
+        src: url("asset/fonts/vip-high-spirited.otf") format("opentype");
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        --paper: #f7f5ee;
+        --ink: #4e6437;
+        --line: #d9dcc9;
+        --mute: #86916f;
+        --veil: rgba(24, 31, 17, 0.95);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper) url("asset/images/background.jpg") repeat center /
+          640px auto;
+        color: var(--ink);
+        font: 400 16px/1.65 Lora, Georgia, "Times New Roman", serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--ink);
+        outline-offset: 3px;
+      }
+
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 20px 96px;
+      }
+
+      /* ---------- đầu trang ---------- */
+      .masthead {
+        text-align: center;
+        padding: 68px 0 34px;
+      }
+
+      .eyebrow {
+        font-family: "Dancing Script", cursive;
+        font-size: 30px;
+        line-height: 1;
+        color: var(--mute);
+      }
+
+      .display {
+        margin: 6px 0 0;
+        font-family: "High Spirited", "Brush Script MT", cursive;
+        font-size: clamp(62px, 12vw, 104px);
+        font-weight: 400;
+        line-height: 1.05;
+        text-wrap: balance;
+      }
+
+      /* con dấu sáp nhánh ô liu, lấy lại từ thiệp */
+      .seal {
+        display: block;
+        width: 46px;
+        height: 46px;
+        margin: 16px auto 18px;
+      }
+
+      .standfirst {
+        max-width: 46ch;
+        margin: 0 auto;
+        font-style: italic;
+        color: var(--mute);
+      }
+
+      /* ---------- lưới ảnh ---------- */
+      .gallery {
+        columns: 3 260px;
+        column-gap: 22px;
+      }
+
+      .shot {
+        margin: 0 0 22px;
+        break-inside: avoid;
+      }
+
+      .shot button {
+        all: unset;
+        display: block;
+        width: 100%;
+        cursor: zoom-in;
+      }
+
+      .shot img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        background: #eceade;
+        box-shadow: 0 1px 2px rgba(39, 50, 28, 0.08),
+          0 14px 30px -18px rgba(39, 50, 28, 0.4);
+        transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+          box-shadow 0.45s ease;
+      }
+
+      .shot button:hover img,
+      .shot button:focus-visible img {
+        transform: translateY(-3px);
+        box-shadow: 0 2px 4px rgba(39, 50, 28, 0.1),
+          0 22px 42px -18px rgba(39, 50, 28, 0.48);
+      }
+
+      /* hiện dần khi cuộn tới */
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ---------- chân trang ---------- */
+      .foot {
+        margin-top: 26px;
+        padding-top: 30px;
+        border-top: 1px solid var(--line);
+        text-align: center;
+      }
+
+      .back {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 26px;
+        border: 1px solid var(--line);
+        border-radius: 9999px;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      }
+
+      .back:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: var(--paper);
+      }
+
+      .signoff {
+        margin: 22px 0 0;
+        font-family: "Dancing Script", cursive;
+        font-size: 26px;
+        color: var(--mute);
+      }
+
+      /* ---------- xem toàn màn hình ---------- */
+      .viewer {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 22px;
+        background: var(--veil);
+        opacity: 0;
+        transition: opacity 0.22s ease;
+      }
+
+      .viewer.open {
+        display: flex;
+        opacity: 1;
+      }
+
+      .viewer img {
+        max-width: 100%;
+        max-height: calc(100dvh - 112px);
+        display: block;
+        object-fit: contain;
+        border-radius: 4px;
+        box-shadow: 0 30px 70px -24px rgba(0, 0, 0, 0.8);
+        transition: opacity 0.22s ease;
+      }
+
+      .viewer .count {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 24px;
+        text-align: center;
+        color: rgba(247, 245, 238, 0.82);
+        font-size: 13px;
+        letter-spacing: 0.14em;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .viewer button {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(247, 245, 238, 0.3);
+        border-radius: 9999px;
+        background: rgba(24, 31, 17, 0.34);
+        color: rgba(247, 245, 238, 0.94);
+        cursor: pointer;
+        transition: background 0.22s ease;
+      }
+
+      .viewer button:hover {
+        background: rgba(247, 245, 238, 0.18);
+      }
+
+      .viewer .prev,
+      .viewer .next {
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .viewer .prev {
+        left: 16px;
+      }
+
+      .viewer .next {
+        right: 16px;
+      }
+
+      .viewer .shut {
+        top: 18px;
+        right: 18px;
+        width: 42px;
+        height: 42px;
+        font-size: 17px;
+      }
+
+      /* ---------- nhạc lễ đường ---------- */
+      .tune {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        z-index: 60;
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        border: 0;
+        border-radius: 9999px;
+        background: var(--ink);
+        color: var(--paper);
+        cursor: pointer;
+        opacity: 0.95;
+        box-shadow: 0 8px 22px rgba(39, 50, 28, 0.28);
+        transition: opacity 0.22s ease, transform 0.22s ease;
+      }
+
+      .tune:hover {
+        opacity: 1;
+        transform: translateY(-1px);
+      }
+
+      .tune svg {
+        display: block;
+        width: 21px;
+        height: 21px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .tune .slash {
+        display: none;
+      }
+
+      .tune.off .slash {
+        display: block;
+      }
+
+      @media (max-width: 700px) {
+        .page {
+          padding: 0 14px 76px;
+        }
+
+        .masthead {
+          padding: 44px 0 24px;
+        }
+
+        .gallery {
+          columns: 2 140px;
+          column-gap: 12px;
+        }
+
+        .shot {
+          margin-bottom: 12px;
+        }
+
+        .shot img {
+          border-radius: 7px;
+        }
+
+        .viewer .prev,
+        .viewer .next {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          transition: none !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <div class="eyebrow">Mạnh Lâm &amp; Nguyễn Thảo</div>
+        <h1 class="display">Our Memories</h1>
+        <img
+          class="seal"
+          src="asset/images/side-card-icon.png"
+          alt=""
+          width="46"
+          height="46"
+        />
+        <p class="standfirst">
+          Trọn bộ 30 khoảnh khắc của chúng mình. Bấm vào ảnh để xem lớn.
+        </p>
+      </header>
+
+      <main class="gallery">
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-01.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Cô dâu chú rể bên hàng cột trắng trong vườn" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-02.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Cô dâu chú rể dắt tay nhau dạo trong vườn" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-03.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Cô dâu chú rể sánh bước dưới vòm cây" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-04.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Chú rể chỉnh voan cho cô dâu trên thảm cỏ" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-05.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Cô dâu chú rể trong trang phục truyền thống trên nền đỏ" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-06.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Cô dâu chú rể chụp trong studio nền trắng" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-07.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Cô dâu tựa vai chú rể, ảnh studio nền trắng" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-08.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Cô dâu ngồi xoè váy, chú rể đứng bên cạnh" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-09.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Hai người cùng tung voan cưới trong vườn" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-10.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Chú rể nghiêng người bên cô dâu dưới lớp voan" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-11.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Voan cưới bay trong gió trên thảm cỏ" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-12.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Chú rể quỳ xuống chỉnh tà váy cho cô dâu" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-13.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Khoảnh khắc cận cảnh hai người bên bó hoa cưới" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-14.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Cô dâu chú rể trò chuyện dưới chiếc dù trắng" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-15.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Hai người che dù trắng giữa vườn cây xanh" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-16.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Chú rể nâng tay cô dâu trên thảm cỏ" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-17.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Cô dâu quay lưng, voan dài trải trên cỏ" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-18.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Cô dâu chú rể bên nhau dưới dù trắng" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-19.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Cô dâu một mình giữa vườn hoa trắng" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-20.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Cô dâu chú rể trước dãy cột của nhà vòm" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-21.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Chân dung chú rể chỉnh tay áo" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-22.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Chân dung chú rể trong vườn" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-23.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Chân dung cô dâu cầm hoa cưới" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-24.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Cô dâu trong chiếc váy xoè, ảnh studio" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-25.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Cô dâu chú rể đứng cạnh nhau trong studio" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-26.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Chú rể vest đen bên cô dâu váy cưới trắng" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-27.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Cô dâu chú rể tựa vào nhau trong studio" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-28.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Chú rể cầm hoa đứng sau cô dâu" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-29.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Cô dâu chú rể cùng nhìn về phía ống kính" /></button></figure>
+        <figure class="shot reveal"><button type="button"><img src="asset/images/album-30.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Cô dâu chú rể bên khung cửa sổ đầy nắng" /></button></figure>
+      </main>
+
+      <footer class="foot">
+        <a class="back" href="index.html">← Về thiệp cưới</a>
+        <p class="signoff">Cảm ơn bạn đã ghé xem</p>
+      </footer>
+    </div>
+
+    <div
+      class="viewer"
+      id="viewer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Xem ảnh cỡ lớn"
+    >
+      <button class="shut" type="button" id="shut" aria-label="Đóng">✕</button>
+      <button class="prev" type="button" id="prev" aria-label="Ảnh trước">‹</button>
+      <img id="stage" alt="" />
+      <button class="next" type="button" id="next" aria-label="Ảnh sau">›</button>
+      <div class="count" id="count"></div>
+    </div>
+
+    <audio id="song" src="asset/audio/le_duong.m4a" loop preload="metadata"></audio>
+    <button class="tune off" type="button" id="tune" aria-pressed="false" title="Bật nhạc">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 18V6l10-2v12" />
+        <circle cx="7" cy="18" r="3" />
+        <circle cx="17" cy="16" r="3" />
+        <path class="slash" d="M4 20L20 4" />
+      </svg>
+    </button>
+
+    <script>
+      (function () {
+        var shots = [].slice.call(document.querySelectorAll(".gallery img"));
+        var viewer = document.getElementById("viewer");
+        var stage = document.getElementById("stage");
+        var count = document.getElementById("count");
+        var at = 0;
+
+        /* hiện dần khi cuộn tới */
+        var figures = [].slice.call(document.querySelectorAll(".reveal"));
+        if ("IntersectionObserver" in window) {
+          var obs = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("in");
+                obs.unobserve(entry.target);
+              });
+            },
+            { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
+          );
+          figures.forEach(function (f) {
+            obs.observe(f);
+          });
+        } else {
+          figures.forEach(function (f) {
+            f.classList.add("in");
+          });
+        }
+
+        /* tải sẵn ảnh liền kề để lật cho mượt */
+        function warm(i) {
+          [i - 1, i + 1].forEach(function (j) {
+            var shot = shots[(j + shots.length) % shots.length];
+            if (!shot) return;
+            var im = new Image();
+            im.decoding = "async";
+            im.src = shot.src;
+          });
+        }
+
+        function show(i) {
+          at = (i + shots.length) % shots.length;
+          var shot = shots[at];
+          stage.style.opacity = "0";
+          var pre = new Image();
+          pre.onload = function () {
+            stage.src = shot.src;
+            stage.alt = shot.alt;
+            requestAnimationFrame(function () {
+              stage.style.opacity = "1";
+            });
+          };
+          pre.src = shot.src;
+          count.textContent = at + 1 + " / " + shots.length;
+          warm(at);
+        }
+
+        function open(i) {
+          show(i);
+          viewer.classList.add("open");
+          document.body.style.overflow = "hidden";
+        }
+
+        function shut() {
+          viewer.classList.remove("open");
+          document.body.style.overflow = "";
+          stage.removeAttribute("src");
+        }
+
+        shots.forEach(function (shot, i) {
+          shot.parentNode.addEventListener("click", function () {
+            open(i);
+          });
+        });
+
+        document.getElementById("shut").addEventListener("click", shut);
+        document.getElementById("prev").addEventListener("click", function () {
+          show(at - 1);
+        });
+        document.getElementById("next").addEventListener("click", function () {
+          show(at + 1);
+        });
+        viewer.addEventListener("click", function (e) {
+          if (e.target === viewer) shut();
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (!viewer.classList.contains("open")) return;
+          if (e.key === "Escape") shut();
+          if (e.key === "ArrowLeft") show(at - 1);
+          if (e.key === "ArrowRight") show(at + 1);
+        });
+
+        /* quẹt ngang trên điện thoại */
+        var x0 = null;
+        var y0 = null;
+        viewer.addEventListener(
+          "touchstart",
+          function (e) {
+            var t = e.changedTouches[0];
+            x0 = t.clientX;
+            y0 = t.clientY;
+          },
+          { passive: true }
+        );
+        viewer.addEventListener(
+          "touchend",
+          function (e) {
+            if (x0 === null) return;
+            var t = e.changedTouches[0];
+            var dx = t.clientX - x0;
+            var dy = t.clientY - y0;
+            x0 = null;
+            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+              show(dx < 0 ? at + 1 : at - 1);
+            }
+          },
+          { passive: true }
+        );
+      })();
+    </script>
+  </body>
+</html>
